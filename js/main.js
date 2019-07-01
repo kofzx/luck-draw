@@ -57,7 +57,7 @@ function triggerFirstOpenButton() {
 }
 window.onload = function () {
     initBag();
-    bindOpenButtonEvent();
+    // bindOpenButtonEvent();
     bindCardEvent();
-    triggerFirstOpenButton();
+    // triggerFirstOpenButton();
 };
