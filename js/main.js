@@ -5,9 +5,9 @@ var mainCardWrapper = document.querySelector(".main-card"),
     maxCardsLen = 4,
     i,
     len;
-var qString = JSON.parse(decodeURIComponent(getQueryString())),
-    cardBagList = qString.cardBagList;
-console.log(qString);
+// var qString = JSON.parse(decodeURIComponent(getQueryString())),
+//     cardBagList = qString.cardBagList;
+// console.log(qString);
 // 初始卡包数量
 function initBag() {
     for (i = 0, len = cardBags.length; i < len; i++) {
@@ -48,7 +48,7 @@ function bindCardEvent() {
        // 点击了卡牌
        if (thisClick.getAttribute('data-type') === 'card') {
             console.log(thisClick);
-           thisClick.setAttribute('class', 'main-card__item--flip');
+           thisClick.setAttribute('class', 'main-card__item main-card__item--flip');
        }
     });
 }
@@ -56,7 +56,7 @@ function triggerFirstOpenButton() {
     openButtons[0].click();
 }
 window.onload = function () {
-    initBag();
+    // initBag();
     // bindOpenButtonEvent();
     bindCardEvent();
     // triggerFirstOpenButton();
