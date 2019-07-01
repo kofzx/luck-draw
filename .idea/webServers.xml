@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="10c8bd0d-8722-4652-9fbf-841ead98096b" name="luckDraw" url="http://192.168.0.200:8080/luck-draw">
+        <fileTransfer port="0" mountedRoot="D:\project\web\luck-draw" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>
