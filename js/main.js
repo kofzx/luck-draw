@@ -5,7 +5,9 @@ var mainCardWrapper = document.querySelector(".main-card"),
     tips = '',
     maxCardsLen = 4,
     i,
-    len;
+    len,
+    randResult = [],
+    cookie = new Cookie();
 var qString = JSON.parse(decodeURIComponent(getQueryString())),
     cardBagList = qString.cardBagList,
     randList = qString.randList;
@@ -29,37 +31,58 @@ function updateTips(newTips) {
 }
 // 为开启按钮绑定点击事件
 function bindOpenButtonEvent() {
+    var clickSameCount = 0;
     for (i = 0, len = openButtons.length; i < len; i++) {
-        openButtons[i].addEventListener('click', function (e) {
-            var cardItems = mainCardWrapper.querySelectorAll(".main-card__item.main-card__item--flip");
-            if (cardItems.length > 0) {
-                return;
-            }
-            var nums = this.getAttribute('data-nums'),
-                cards = this.getAttribute('data-cards'),
-                emptyHtmlString = "<div class=\"main-card__empty\">暂无卡牌~</div>",
-                htmlString = "";
-            if (parseInt(nums) > 0) {
-                for (i = 0; i < cards; i++) {
-                    var randBonus = randList[Math.floor(Math.random() * maxCardsLen)];
-                    htmlString += "<div class=\"main-card__item\" data-type=\"card\">\n" +
-                        "\t\t\t\t<div class=\"front\">\n" +
-                        "\t\t\t\t\t<img class=\"card-bg\" src=\"" + cardImagePath + "\" alt=\"\">\n" +
-                        "\t\t\t\t</div>\n" +
-                        "\t\t\t\t<div class=\"end\">\n" +
-                        "\t\t\t\t\t<p>" + randBonus + "</p>\n" +
-                        "\t\t\t\t</div>\n" +
-                        "\t\t\t</div>";
+        (function(i){
+            openButtons[i].addEventListener('click', function (e) {
+                var nums = this.getAttribute('data-nums'),
+                    cards = this.getAttribute('data-cards'),
+                    index = this.getAttribute('data-index'),
+                    emptyHtmlString = "<div class=\"main-card__empty\">暂无卡牌~</div>",
+                    htmlString = "";
+                if (hasFlip()) {
+                    return;
                 }
-                for (i = 0; i < maxCardsLen - cards; i++) {
-                    htmlString += "<div class=\"main-card__item--empty\"></div>";
+                if (parseInt(index) === i) {
+                    console.log(clickSameCount);
+                    if (clickSameCount > 0) {
+                        return;
+                    }
+                    clickSameCount++;
+                } else {
+                    clickSameCount = 0;
                 }
-            } else {
-                htmlString = emptyHtmlString;
-            }
-            mainCardWrapper.innerHTML = htmlString;
-        });
+                if (parseInt(nums) > 0) {
+                    var randGroup = [];
+                    for (i = 0; i < cards; i++) {
+                        var randBonus = randList[Math.floor(Math.random() * maxCardsLen)];
+                        randGroup.push(randBonus);
+                        htmlString += "<div class=\"main-card__item\" data-type=\"card\">\n" +
+                            "\t\t\t\t<div class=\"front\">\n" +
+                            "\t\t\t\t\t<img class=\"card-bg\" src=\"" + cardImagePath + "\" alt=\"\">\n" +
+                            "\t\t\t\t</div>\n" +
+                            "\t\t\t\t<div class=\"end\">\n" +
+                            "\t\t\t\t\t<p>" + randBonus + "</p>\n" +
+                            "\t\t\t\t</div>\n" +
+                            "\t\t\t</div>";
+                    }
+                    randResult = randResult.concat(randGroup);
+                    console.log(randResult);
+                    for (i = 0; i < maxCardsLen - cards; i++) {
+                        htmlString += "<div class=\"main-card__item--empty\"></div>";
+                    }
+                } else {
+                    htmlString = emptyHtmlString;
+                }
+                mainCardWrapper.innerHTML = htmlString;
+            });
+        })(i);
     }
+}
+// 判断当前组是否有已翻得卡牌
+function hasFlip() {
+    var cardItems = mainCardWrapper.querySelectorAll(".main-card__item.main-card__item--flip");
+    return cardItems.length > 0;
 }
 // 绑定卡牌事件
 function bindCardEvent() {

@@ -26,3 +26,7 @@ function _getQueryString(queryList) {
 function getQueryString() {
     return _getQueryString(getQuerys());
 }
+function Cookie() {}
+Cookie.prototype.set = function (key, value) {
+    document.cookie = key + "=" + value;
+};
