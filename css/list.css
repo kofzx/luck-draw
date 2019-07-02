@@ -1,0 +1,19 @@
+.title {
+    font-weight: bold;
+    margin: 1rem 0.6rem;
+}
+.rand-list-box {
+    margin-top: 1.4rem;
+    padding: 0 0.6rem;
+}
+.rand-list-box__item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+.rand-list-box__item .time {
+    font-size: 0.875rem;
+}
+.rand-list-box__item .bonus {
+    font-size: 0.875rem;
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
+    <title></title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/list.css">
+</head>
+<body>
+    <h2 class="title">我的翻牌记录</h2>
+    <div class="rand-list-box">
+        <!--<div class="rand-list-box__item">
+            <text class="time">2019-07-02 22:19</text>
+            <text class="bonus">0.2</text>
+        </div>-->
+    </div>
+    <script src="./js/util.js"></script>
+    <script>
+        var cookie = new Cookie();
+        var randResult = cookie.get('randResult') ? JSON.parse(cookie.get('randResult')) : [],
+            randListBox = document.querySelector(".rand-list-box"),
+            htmlString = "";
+        randResult.forEach(function (item) {
+            var time = item.time,
+                bonus = item.bonus;
+            htmlString += "<div class=\"rand-list-box__item\">\n" +
+                "            <text class=\"time\">" + time + "</text>\n" +
+                "            <text class=\"bonus\">" + bonus + "</text>\n" +
+                "        </div>";
+            randListBox.innerHTML = htmlString;
+        });
+    </script>
+</body>
+</html>
