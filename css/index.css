@@ -3,6 +3,12 @@
     text-align: center;
     margin-top: 2rem;
 }
+.record {
+    font-size: 0.875rem;
+    position: absolute;
+    top: 2.6rem;
+    right: 0.6rem;
+}
 .card-bags {
     width: 100%;
     margin-top: 1.8rem;
@@ -37,11 +43,17 @@
     border-radius: 4px;
     margin-top: 0.8rem;
 }
+.tips {
+    font-size: 0.875rem;
+    text-align: center;
+    min-height: 1rem;
+    margin-top: 1.4rem;
+}
 .main-card {
     box-sizing: border-box;
     width: 93%;
     height: 27rem;
-    margin: 1.8rem auto 0.8rem;
+    margin: 0.8rem auto 0.8rem;
     border: 1px solid #262626;
     border-radius: 4px;
     padding: 0.8rem 0.35rem 0;
@@ -52,13 +64,19 @@
     perspective: 1200px;
     transform-style: preserve-3d;
 }
-.main-card__empty {
+.main-card__empty,
+.main-card__success{
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate3d(-50%,-50%,0) rotate(5deg);
     font-size: 2.5rem;
     white-space: nowrap;
+}
+.main-card__empty {
+    transform: translate3d(-50%,-50%,0) rotate(5deg);
+}
+.main-card__success {
+    transform: translate3d(-50%,-50%,0) rotate(-5deg);
 }
 .main-card__item,
 .main-card__item--empty {
