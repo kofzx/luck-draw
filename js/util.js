@@ -1,30 +1,16 @@
-function getQuerys() {
-    var queryString = document.location.search.slice(1),
-        paramsArray = queryString.split("&"),
-        result = [];
-    paramsArray.forEach(function (item) {
-        var arr = item.split("="),
-            key = arr[0],
-            value = arr[1],
-            obj = {};
-        obj[key] = value;
-        result.push(obj);
-    });
-    return result;
-}
-function _getQueryString(queryList) {
-    var qString = '';
-    for (var i = 0, len = queryList.length; i< len; i++) {
-        var item = queryList[i];
-        if (item.hasOwnProperty("q")) {
-            qString = item.q;
-            break;
-        }
+function urlArgs() {
+    var args = {};
+    var query = location.search.substring(1);
+    var pairs = query.split("&");
+    for (var i = 0; i < pairs.length; i++) {
+        var pos = pairs[i].indexOf('=');
+        if (pos == -1) continue;
+        var name = pairs[i].substring(0, pos);
+        var value = pairs[i].substring(pos + 1);
+        value = decodeURIComponent(value);
+        args[name] = value;
     }
-    return qString;
-}
-function getQueryString() {
-    return _getQueryString(getQuerys());
+    return args;
 }
 function formatTime(d) {
     var year = d.getFullYear(),
@@ -46,14 +32,15 @@ Cookie.prototype.set = function (key, value) {
 };
 Cookie.prototype.get = function (key) {
     var cookie = document.cookie.replace(/\s/g, ""),
-        arr = cookie.split(";");
-    for (var i = 0, len = arr.length; i < len; i++) {
-        var item = arr[i],
-            _arr = item.split("="),
-            _key = _arr[0],
-            _value = _arr[1];
-        if (key === _key) {
-            return _value;
+        pairs = cookie.split(";");
+    for (var i = 0, len = pairs.length; i < len; i++) {
+        var pos = pairs[i].indexOf("=");
+        if (pos == -1) continue;
+        var name = pairs[i].substring(0, pos);
+        var value = pairs[i].substring(pos + 1);
+        value = decodeURIComponent(value);
+        if (key === name) {
+            return value;
         }
     }
     return false;

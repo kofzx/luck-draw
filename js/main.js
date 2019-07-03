@@ -8,9 +8,11 @@ var mainCardWrapper = document.querySelector(".main-card"),
     len,
     randResult = [],
     cookie = new Cookie();
-var qString = JSON.parse(decodeURIComponent(getQueryString())),
-    cardBagList = qString.cardBagList,
-    randList = qString.randList;
+var args = urlArgs(),
+    _q = args.q || '',
+    q = JSON.parse(_q),
+    cardBagList = q.cardBagList,
+    randList = q.randList;
 // 渲染卡包数量
 function renderBag() {
     for (i = 0, len = cardBags.length; i < len; i++) {
@@ -138,13 +140,13 @@ function triggerFirstOpenButton() {
     openButtons[0].click();
 }
 function onRecord() {
-    return false;
+    if (cookie.get('randResult')) {
+        location.href = "list.html";
+    }
 }
 window.onload = function () {
     if (cookie.get('randResult')) {
-        var body = document.querySelector("body");
-        body.innerHTML = "<h2 class='expire-page'>页面已过期</h2>";
-        return;
+
     }
     updateTips();
     renderBag();
