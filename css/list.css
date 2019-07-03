@@ -1,3 +1,6 @@
+body {
+    background-color: #ffffff;
+}
 .title {
     font-weight: bold;
     margin: 1rem 0.6rem;

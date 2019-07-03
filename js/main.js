@@ -6,6 +6,7 @@ var mainCardWrapper = document.querySelector(".main-card"),
     maxCardsLen = 4,
     i,
     len,
+    curOpenButtonIndex = 0,
     randResult = [],
     cookie = new Cookie();
 var args = urlArgs(),
@@ -30,6 +31,9 @@ function updateTips(newTips) {
     var tipsDom = document.querySelector(".tips");
     tipsDom.innerText = tips;
 }
+function resetTips() {
+    updateTips('请开始你的翻牌');
+}
 // 为开启按钮绑定点击事件
 function bindOpenButtonEvent() {
     for (i = 0, len = openButtons.length; i < len; i++) {
@@ -37,9 +41,15 @@ function bindOpenButtonEvent() {
             openButtons[i].addEventListener('click', function (e) {
                 var nums = this.getAttribute('data-nums'),
                     cards = this.getAttribute('data-cards'),
+                    index = this.getAttribute('data-index'),
                     emptyHtmlString = "<div class=\"main-card__empty\">暂无卡牌~</div>",
                     htmlString = "";
+                resetTips();
                 if (hasFlip()) {
+                    if (parseInt(index) !== parseInt(curOpenButtonIndex)) {
+                        updateTips('请翻完当前所有牌');
+                    }
+                    curOpenButtonIndex = index;
                     return;
                 }
                 if (parseInt(nums) > 0) {
@@ -73,6 +83,7 @@ function hasFlip() {
 // 绑定卡牌事件
 function bindCardEvent() {
     mainCardWrapper.addEventListener('click', function (e) {
+        resetTips();
        var thisClick = e.target;
        // 点击了卡牌
        if (thisClick.getAttribute('data-type') === 'card') {
@@ -141,15 +152,16 @@ function triggerFirstOpenButton() {
 }
 function onRecord() {
     if (cookie.get('randResult')) {
-        location.href = "list.html";
+        location = "list.html";
+    } else {
+        updateTips('翻完所有牌才能查看记录哦~');
     }
 }
 window.onload = function () {
-    if (cookie.get('randResult')) {
-
-    }
     updateTips();
-    renderBag();
+    if (!cookie.get('randResult')) {
+        renderBag();
+    }
     bindOpenButtonEvent();
     bindCardEvent();
     triggerFirstOpenButton();

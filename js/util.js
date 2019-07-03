@@ -17,8 +17,9 @@ function formatTime(d) {
         month = formatNumber(d.getMonth() + 1),
         date = formatNumber(d.getDate()),
         hour = formatNumber(d.getHours()),
-        minute = formatNumber(d.getMinutes());
-    return [year, month, date].join("-") + "\0" + [hour, minute].join(":");
+        minute = formatNumber(d.getMinutes()),
+        second = formatNumber(d.getSeconds());
+    return [year, month, date].join("-") + "T" + [hour, minute,second].join(":");
 }
 function formatNumber(n) {
     n = n / 10 >= 1 ? n : "0" + n;

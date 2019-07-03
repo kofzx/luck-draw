@@ -24,6 +24,7 @@
         randResult.forEach(function (item) {
             var time = item.time,
                 bonus = item.bonus;
+            time = time.replace(/T/g, ' ');
             htmlString += "<div class=\"rand-list-box__item\">\n" +
                 "            <text class=\"time\">" + time + "</text>\n" +
                 "            <text class=\"bonus\">" + bonus + "</text>\n" +
