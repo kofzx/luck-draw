@@ -1,0 +1,25 @@
+.login-box {
+    width: 85%;
+    margin: 100px auto 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.login-box .user-avatar {
+    width: 120px;
+    height: 120px;
+    line-height: 120px;
+    text-align: center;
+    border: 2px solid rgba(0,0,0,0.8);
+    border-radius: 50%;
+}
+.login-box .user-avatar i {
+    font-size: 60px;
+    color: rgba(0,0,0,0.8);
+}
+.login-box .login-form .input-box {
+    width: 260px;
+    height: 40px;
+    border: 1px solid rgba(0,0,0,0.6);
+    border-radius: 50px;
+}
