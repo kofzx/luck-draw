@@ -7,13 +7,7 @@ var mainCardWrapper = document.querySelector(".main-card"),
     i,
     len,
     curOpenButtonIndex = 0,
-    randResult = [],
-    cookie = new Cookie();
-var args = urlArgs(),
-    _q = args.q || '',
-    q = JSON.parse(_q),
-    cardBagList = q.cardBagList,
-    randList = q.randList;
+    randResult = [];
 // 渲染卡包数量
 function renderBag() {
     for (i = 0, len = cardBags.length; i < len; i++) {
@@ -158,11 +152,11 @@ function onRecord() {
     }
 }
 window.onload = function () {
-    updateTips();
-    if (!cookie.get('randResult')) {
-        renderBag();
-    }
-    bindOpenButtonEvent();
-    bindCardEvent();
-    triggerFirstOpenButton();
+    // updateTips();
+    // if (!cookie.get('randResult')) {
+    //     renderBag();
+    // }
+    // bindOpenButtonEvent();
+    // bindCardEvent();
+    // triggerFirstOpenButton();
 };
